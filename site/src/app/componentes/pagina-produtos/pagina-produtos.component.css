@@ -1,0 +1,13 @@
+.corpo {
+  margin: 20px 60px 0 60px;
+  height: auto; 
+  text-align: center; 
+}
+
+.corpo img {
+  width: 100%;     
+  max-width: 800px; 
+  height: auto;    
+  display: block;  
+  margin: 0 auto;  
+}

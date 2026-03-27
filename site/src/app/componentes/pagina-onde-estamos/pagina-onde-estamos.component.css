@@ -1,0 +1,30 @@
+.ajustePosicao {
+  margin: 40px auto;       
+  text-align: center;       
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card {
+  width: 90%;               
+  max-width: 700px;         
+  height: auto;             /* altura proporcional à imagem */
+  border-radius: 15px;
+  overflow: hidden;         /* garante que os cantos arredondados funcionem */
+  margin: 0 auto;           /* centraliza o card */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.card img {
+  width: 100%;
+  height: auto;             /* mantém proporção */
+  display: block;           /* remove espaços em linha */
+  border-radius: 15px;      /* mantém cantos arredondados na imagem */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .card {
+    max-width: 95%;        /* ocupa quase toda a tela em celular */
+  }
+}

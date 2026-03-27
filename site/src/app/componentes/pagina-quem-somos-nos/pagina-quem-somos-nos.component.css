@@ -1,0 +1,98 @@
+/* Container principal */
+.corpo {
+  position: relative;
+  width: 100%;
+  min-height: 900px;
+  padding: 20px;
+  background-image: url('/img/pagina_quem_somos/quemSomoNos_Gemini_Generated_Image.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+/* Bloco Quem Somos / Nossos Valores */
+.quemSomos {
+  max-width: 850px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(127, 236, 255, 0.9); /* semitransparente */
+  border: 2px solid rgb(40, 50, 240);
+  border-radius: 8px;
+  color: #000;
+  box-sizing: border-box;
+}
+
+.quemSomos h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  text-decoration: underline;
+}
+
+.quemSomos p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Bloco valores com altura maior se necessário */
+.quemSomos.valores {
+  min-height: 300px;
+}
+
+/* Imagem decorativa no canto */
+.fundo {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
+
+.fundo img {
+  width: 200px;
+  height: auto;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .quemSomos {
+    width: 90%;
+    padding: 16px;
+  }
+
+  .quemSomos h2 {
+    font-size: 1.8rem;
+  }
+
+  .quemSomos p {
+    font-size: 1rem;
+  }
+
+  .fundo img {
+    width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .quemSomos {
+    width: 95%;
+    padding: 12px;
+  }
+
+  .quemSomos h2 {
+    font-size: 1.5rem;
+  }
+
+  .quemSomos p {
+    font-size: 0.95rem;
+  }
+
+  .fundo img {
+    width: 100px;
+  }
+
+  .corpo {
+    min-height: 600px;
+  }
+}

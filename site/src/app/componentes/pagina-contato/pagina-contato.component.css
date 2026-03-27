@@ -1,0 +1,80 @@
+/* Container externo */
+.moldura {
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: center;     /* centraliza verticalmente */
+  background: #e0e0e0;
+  padding: 40px 20px;
+  min-height: 100vh;       /* ocupa toda a altura da tela */
+  box-sizing: border-box;
+}
+
+/* Formulário interno */
+.home-content {
+  width: 100%;
+  max-width: 600px;       /* define o tamanho do formulário */
+  background: white;
+  padding: 30px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+/* Campos padronizados */
+.form-field {
+  width: 100%;
+}
+
+/* Checkbox grupos */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Termos e botão */
+.termos-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+textarea[pTextarea] {
+  width: 100%;
+  max-width: 100%;
+  min-height: 40px;
+  font-size: 16px;
+  padding: 0 14px;
+  border: 1px solid rgba(0,0,0,0.38);
+  border-radius: 4px;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+/* Botão enviar */
+.btn-enviar {
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+.leia_termos{
+  cursor: pointer;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .home-content {
+    max-width: 100%;
+  }
+
+  .btn-enviar {
+    width: 100%;
+    max-width: 250px;
+  }
+}

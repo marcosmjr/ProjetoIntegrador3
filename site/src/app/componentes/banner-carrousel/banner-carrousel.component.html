@@ -1,0 +1,28 @@
+<!--  
+
+Codigo original em  
+https://ng-bootstrap.github.io/#/components/carousel/examples
+  
+-->
+
+@if (images) {
+	<ngb-carousel>
+		<ng-template ngbSlide>
+			<div class="picsum-img-wrapper">
+				<img class="banner" [src]="images[0]" alt="Banner - 1 Fabio AR Comdicionado" />
+			</div>
+		</ng-template>
+		<ng-template ngbSlide>
+			<div class="picsum-img-wrapper">
+				<img class="banner" [src]="images[1]" alt="Banner 2 - Fabio AR Comdicionado" />
+			</div>
+		</ng-template>
+		<ng-template ngbSlide>
+			<div class="picsum-img-wrapper">
+				<img class="banner" [src]="images[2]" alt="Banner 3 - Fabio AR Comdicionado" />
+			</div>
+		</ng-template>
+	</ngb-carousel>
+
+    
+}

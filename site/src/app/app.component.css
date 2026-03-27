@@ -1,0 +1,100 @@
+/* Moldura geral */
+.moldura {
+  display: flex;
+  justify-content: center; /* centraliza conteúdo horizontal */
+  min-height: 100vh;
+  background: #e0e0e0; /* cor das faixas laterais */
+  padding: 0 20px; /* espaçamento mínimo nas laterais */
+  box-sizing: border-box;
+}
+
+/* Container interno centralizado */
+.home-content {
+  max-width: 1200px; /* largura máxima do conteúdo */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Banner */
+.banner {
+  width: 100%;
+}
+
+
+/* Menu */
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  background: #115aa3;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.btn-menu {
+  color: rgb(0, 0, 0) !important;
+  background: #2196f3;
+  border-radius: 6px;
+  padding: 8px 16px;
+  transition: background 0.3s;
+  text-align: center;
+  min-width: 100px;
+}
+
+.btn-menu:hover {
+  background: #1565c0;
+}
+
+/* Conteúdo */
+.conteudo {
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+/* Rodapé */
+footer {
+  background: #f5f5f5;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.footer-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-links p,
+.endereco p {
+  margin: 5px 0;
+}
+
+#cnpj {
+  font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .btn-menu {
+    width: 100%;
+    max-width: 300px;
+  }
+}

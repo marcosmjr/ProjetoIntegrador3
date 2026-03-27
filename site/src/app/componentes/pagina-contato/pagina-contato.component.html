@@ -1,0 +1,116 @@
+<!--Componentes Material https://material.angular.io/-->
+<form #formularioContato="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="moldura">
+    <div class="home-content">
+
+      <!-- Nome e Sobrenome -->
+      <mat-form-field class="form-field">
+        <mat-label>Nome:</mat-label>
+        <input matInput [(ngModel)]="nome" name="nome" required>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Sobrenome:</mat-label>
+        <input matInput [(ngModel)]="sobrenome" name="sobrenome" required>
+      </mat-form-field>
+
+      <!-- Telefone e Serviços -->
+      <mat-form-field class="form-field">
+        <mat-label>Telefone:</mat-label>
+        <input matInput mask="(00) 0000-0000 || (00) 0 0000-0000"
+               [(ngModel)]="telefone" name="telefone" required>
+      </mat-form-field>
+
+      <div class="checkbox-group">
+        <legend>Serviços:</legend>
+        <mat-checkbox [(ngModel)]="instalacao" name="instalacao">Instalação</mat-checkbox>
+        <mat-checkbox [(ngModel)]="manutencao" name="manutecao">Manutenção</mat-checkbox>
+        <mat-checkbox [(ngModel)]="compra" name="compra">Compra</mat-checkbox>
+        <mat-checkbox [(ngModel)]="outros" name="outros">Outros</mat-checkbox>
+      </div>
+
+      <!-- WhatsApp e E-mail -->
+      <mat-checkbox (change)="ckbUsarMesmoNumero($event.checked)"
+                    [(ngModel)]="mesmoWhasApp" name="mesmoWhasApp">
+        Usar o mesmo número para WhatsApp?
+      </mat-checkbox>
+
+      <mat-form-field class="form-field">
+        <mat-label>WhatsApp:</mat-label>
+        <input matInput mask="(00) 0000-0000 || (00) 0 0000-0000"
+               [(ngModel)]="whatsApp" name="whatsApp">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>E-mail:</mat-label>
+        <input matInput type="email" [(ngModel)]="email" name="email">
+      </mat-form-field>
+
+      <!-- Preferências e Empresa -->
+      <div class="checkbox-group">
+        <legend>Prefere retorno por:</legend>
+        <mat-checkbox [(ngModel)]="preferenciaTelefone" name="preferenciaTelefone">Telefone</mat-checkbox>
+        <mat-checkbox [(ngModel)]="preferenciaWhatsApp" name="preferenciaWhatsApp">WhatsApp</mat-checkbox>
+        <mat-checkbox [(ngModel)]="preferenciaEmail" name="preferenciaEmail">E-Mail</mat-checkbox>
+      </div>
+
+      <mat-checkbox (change)="ckbPessoaJuridica($event.checked)" [(ngModel)]="pj" name="pj">
+        É pessoa jurídica?
+      </mat-checkbox>
+
+      <mat-form-field class="form-field">
+        <mat-label>Nome da Empresa:</mat-label>
+        <input matInput [(ngModel)]="nomeEmpresa" name="nomeEmpresa" [disabled]="nome_empresa_estado">
+      </mat-form-field>
+
+      <!-- Endereço -->
+      <mat-form-field class="form-field">
+        <mat-label>Rua, Av, etc:</mat-label>
+        <input matInput [(ngModel)]="rua" name="rua">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Número:</mat-label>
+        <input matInput [(ngModel)]="numero" name="numero">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Bairro:</mat-label>
+        <input matInput [(ngModel)]="bairro" name="bairro">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Cidade:</mat-label>
+        <input matInput [(ngModel)]="cidade" name="cidade">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>UF</mat-label>
+        <mat-select [(ngModel)]="uf" name="uf">
+          @for (estado of estados; track estado) {
+            <mat-option [value]="estado.value">{{ estado.viewValue }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Mensagem -->
+      <label class="menssagem">Mensagem:</label>
+      <textarea pTextarea rows="8" [(ngModel)]="mensagem" name="mensagem"
+                [autoResize]="false"></textarea>
+
+      <!-- Termos e botão -->
+      <div class="termos-row">
+        <mat-checkbox (change)="ckbTermosPrivacidade($event.checked)"
+                      [(ngModel)]="termosPriv" name="termosPriv">
+          Li e concordo com política de privacidade
+        </mat-checkbox>
+
+        <p class="leia_termos" (click)="termosPrivacidade_()">Leia aqui</p>
+
+        <button type="submit" mat-flat-button class="btn-enviar">Enviar</button>
+      </div>
+
+    </div>
+  </div>
+</form>
+

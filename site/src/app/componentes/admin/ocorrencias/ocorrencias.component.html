@@ -1,0 +1,131 @@
+
+<div >
+  <div class="div_btn_ordena">
+    <div>
+      <button class="btn-css" mat-button (click)="ordenaCrescente()">Mais antigo primeiro</button>
+    </div>
+    <div>
+      <button class="btn-css" mat-button (click)="ordenaDecrescente()">Mais novo primeiro</button>
+    </div>
+  </div>
+
+  <span hidden>{{arrayItensTabela[0].bairro_cliente}}</span> <!-- Sem essa linha os dados da tabela não aparecem-->
+
+  <div class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource">
+
+
+      <ng-container matColumnDef="linha">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td class="fontTabela" mat-cell *matCellDef="let element">{{element.id_ocorrencias}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="dadosCliente">
+        <th mat-header-cell *matHeaderCellDef> Dados </th>
+        <td mat-cell *matCellDef="let element">
+          <div>
+            <table class="fontTabela">
+              <th id="th-legenda"></th>
+              <tr>
+                <td class="fontTabela"><strong>Nome:................  </strong></td>
+                <td>{{element.nome_cliente}} <span> </span> {{element.sobrenome_cliente}}</td>
+              </tr>
+              <tr>
+                <td class="fontTabela"><strong>Serviço solicitado:..  </strong></td>
+                <td>{{element.servico_ocorrencias}}</td>
+              </tr>
+
+              <tr>
+                <td class="fontTabela"><strong>Data do pedido:......  </strong></td>
+                <td>{{element.dataOcorrencia}}</td>
+              </tr>
+
+              <tr>
+                <td class="fontTabela"><strong>Nome da Empresa:.....  </strong></td>
+                <td>{{element.nome_empresa_cliente }}</td>
+              </tr>
+
+              <tr>
+                <td class="fontTabela"><strong>Telefone:......  </strong></td>
+                <td>{{element.telefone_cliente}}</td>
+              </tr>
+
+              <tr>
+                <td class="fontTabela"><strong>WhatsApp:......  </strong></td>
+                <td>{{element.whatsapp_cliente}}</td>
+              </tr>
+
+              <tr>
+                <td class="fontTabela"><strong>E-Mail:......  </strong></td>
+                <td>{{element.e_mail_cliente}}</td>
+              </tr>
+
+              <tr>
+                <td class="fontTabela"><strong>Preferência:......  </strong></td>
+                <td>{{element.preferencia_cliente}}</td>
+              </tr>
+
+              <tr>
+                <td><strong>Logradouro:..........  </strong></td>
+                <td>{{element.rua_cliente}}</td>
+              </tr>
+
+              <tr>
+                <td><strong>No:..................  </strong></td>
+                <td>{{element.numero_cliente}}</td>
+              </tr>
+              <tr>
+                <td><strong>Bairro:..............  </strong></td>
+                <td>{{element.bairro_cliente}}</td>
+              </tr>
+              <tr>
+                <td><strong>Cidade:..............  </strong></td>
+                <td>{{element.cidade_cliente}}</td>
+              </tr>
+              <tr>
+                <td><strong>UF:..................  </strong></td>
+                <td>{{element.estado_cliente}}</td>
+              </tr>
+
+            </table>
+            <div class="mensagem">
+              <div></div>
+              <div><legend><strong>Menssagem:</strong></legend>
+                <textarea readonly class="font-textarea area-menssagem" name="textTab" id="texTab">{{element.mensagem_ocorrencias}}</textarea>
+              </div>
+            </div>
+
+          </div>
+           </td>
+      </ng-container>
+
+
+
+      <ng-container matColumnDef="lixeira">
+        <th mat-header-cell *matHeaderCellDef> Lixeira </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}}
+          <div>
+            <img style="width: 32px; height: auto;" src="/img/icons/delete_42dp_434343_FILL0_wght400_GRAD0_opsz40.svg" alt="Exclui Cadastro " (click)="apagarCadastro(element.id_ocorrencias)">
+          </div>
+        </td>
+
+
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+
+
+</div>
+<div class="btnVoltar">
+  <button mat-flat-button class="btn-css" (click)="btnVoltar()">voltar</button>
+</div>

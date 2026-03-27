@@ -1,0 +1,66 @@
+<div class="moldura">
+  <div class="home-content">
+    <!-- Banner -->
+    <div class="banner">
+      <app-banner-carrousel></app-banner-carrousel>
+    </div>
+
+    <!-- Menu -->
+    <nav class="menu">
+      <button class="btn-menu" mat-button (click)="pagina_servicos()">Home</button>
+      <button class="btn-menu" mat-button (click)="pagina_produtos()">Produtos</button>
+      <button class="btn-menu" mat-button (click)="pagina_quem_somos()">Quem Somos</button>
+      <button class="btn-menu" mat-button (click)="pagina_onde_estamos()">Onde Estamos</button>
+      <button class="btn-menu" mat-button (click)="pagina_contato()">Contato</button>
+      <a href="https://www.blogger.com/about/?hl=pt-br" target="_blank" class="btn-menu" mat-button>
+       Blog 
+      </a>
+      <button class="btn-menu" mat-button (click)="admin()">Administrador</button>
+    </nav>
+
+    <!-- Conteúdo dinâmico -->
+    <main class="conteudo">
+      @if (selecaoPagina == 0) {
+        <app-pagina-servicos></app-pagina-servicos>
+      } @else if (selecaoPagina == 1) {
+        <app-pagina-produtos></app-pagina-produtos>
+      } @else if (selecaoPagina == 2) {
+        <app-pagina-quem-somos-nos></app-pagina-quem-somos-nos>
+      } @else if (selecaoPagina == 4) {
+        <app-pagina-onde-estamos></app-pagina-onde-estamos>
+      } @else if (selecaoPagina == 5) {
+        <app-pagina-contato></app-pagina-contato>
+      } @else if (selecaoPagina == 6) {
+        <app-admin></app-admin>
+      }
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+      <div class="footer-info">
+        <div class="footer-links">
+          <div>
+            <p><a href="#" (click)="pagina_servicos()">Home</a></p>
+          <p><a href="#" (click)="pagina_onde_estamos()">Onde Estamos</a></p>
+          <p><a href="#" (click)="pagina_contato()">Contatos</a></p>
+          </div>
+          
+        </div>
+        
+        <div class="endereco">
+          Endereço: Rua Romeu Benazi, n° 153 <br>
+            Bairro: Parque Nova Carioba<br>
+            Cidade: Americana-SP<br>
+        </div>
+
+        <div class="endereco">
+          <p>
+            CEP: 13473-789<br>
+            Telefone: (19) 97408-7892<br>
+            CNPJ: 52.535.091.0001-61
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

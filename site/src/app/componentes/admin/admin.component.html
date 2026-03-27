@@ -1,0 +1,19 @@
+@if(permissao){
+
+<app-ocorrencias (enviaEstadoPermissão)="recebePermissao($event)"></app-ocorrencias>
+
+}@else {
+<form #login="ngForm" (ngSubmit)="btnEntrar()" novalidate>
+
+  <div class="corpo">
+    <div class="campo">
+      <label>Administrador</label>
+      <mat-form-field class="mat-form1">
+        <mat-label>Senha:</mat-label>
+         <input id="enter" matInput type="password" [(ngModel)]="senha" name="senha">
+      </mat-form-field>
+      <button mat-flat-button class="btn-enviar" type="submit">Entrar</button>
+    </div>
+  </div>
+</form>
+}

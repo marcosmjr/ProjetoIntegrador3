@@ -1,0 +1,45 @@
+.corpo {
+  position: relative;
+  height: 900px;
+  background-image: url(/img/admin/snowflakes.png);
+  background-size: cover;
+}
+
+.campo {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  top: 30%;
+  left: 38%;
+  background-color: rgb(23, 1, 114);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.campo label {
+  margin-bottom: 10px;
+  color: white;
+
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .campo {
+    position: relative;
+    width: 80%;
+    left: 10%;
+    top: 20%;
+  }
+
+  .btn-enviar {
+    width: 100%;
+    max-width: none;
+  }
+
+  .corpo {
+    min-height: auto;
+    padding-bottom: 40px;
+  }
+}
+
