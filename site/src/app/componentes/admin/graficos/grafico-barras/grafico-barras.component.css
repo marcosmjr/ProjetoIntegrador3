@@ -1,0 +1,71 @@
+table {
+  width: 100%;
+}
+
+.btnVoltar {
+  display: flex;
+  justify-content: right;
+  margin: 10px 0px 20px 0px;
+}
+
+.btnVoltar button {
+  width: 200px;
+}
+
+.fontTabela{
+  margin-top: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+}
+
+#th-legenda {
+  width: 200px;
+}
+
+.area-menssagem {
+  text-align: left;
+  vertical-align: top;
+  max-width: 1000px;
+  width: 100%;
+  height: 100px;
+  border: 1px, solid gray;
+  border-radius: 5px;
+  resize: none;
+}
+
+
+.mensagem {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.mensagem legend{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+}
+
+.font-textarea{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+}
+
+
+.div_btn_ordena{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.btn-css {
+  color: rgb(0, 0, 0);
+  background: #2196f3;
+  border-radius: 6px;
+  padding: 8px 16px;
+  transition: background 0.3s;
+  text-align: center;
+  min-width: 100px;
+  margin-left: 10px;
+}
+
+.btn-css:hover {
+  background: #1565c0;
+}

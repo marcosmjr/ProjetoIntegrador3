@@ -56,16 +56,23 @@ export class OcorrenciasComponent  implements OnInit{
     });
 
   }
-
-  @Output() enviaEstadoPermissão = new EventEmitter<boolean>();
+//************************************************************** */
+  @Output() enviaEstadoPermissão = new EventEmitter<string>();
 
   enviaPermissao(): void{
-    this.enviaEstadoPermissão.emit(false);
+    this.enviaEstadoPermissão.emit("sair");
   }
 
   btnVoltar() {
   this.enviaPermissao();
   }
+
+  btnGraficoLinha(){
+    this.enviaEstadoPermissão.emit("graficoLinhas");
+  }
+
+/**************************************************************** */
+
 
 
   arrayTabela(dados: RespostaAPI){

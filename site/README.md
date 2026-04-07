@@ -28,12 +28,10 @@ NGX MASK - https://www.npmjs.com/package/ngx-mask
 ```bash
 npm i ngx-mask
 ```
-# 4 Funções de critografia e decriptografia
+# 4 Usando a biblioteca Chart.js para gração de gráficos
 ```bash
-npm install crypto-js
-npm i --save-dev @types/crypto-js
+npm install ng2-charts chart.js
 ```
-Referencia: https://dev.to/anilsingh/angular-17-encrypting-decrypting-data-with-cryptojs-angular-17-tutorial-react-30mh
 
 # FabioArCondicionado
 

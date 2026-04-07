@@ -1,6 +1,10 @@
 @if(permissao){
 
-<app-ocorrencias (enviaEstadoPermissão)="recebePermissao($event)"></app-ocorrencias>
+  @if(paginasInternas == 0){
+    <app-ocorrencias (enviaEstadoPermissão)="recebePermissao($event)"></app-ocorrencias>
+  }@else if(paginasInternas == 1){
+    <app-grafico-barras (enviaVoltar)="recebePermissao($event)" ></app-grafico-barras>
+  }
 
 }@else {
 <form #login="ngForm" (ngSubmit)="btnEntrar()" novalidate>

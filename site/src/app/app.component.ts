@@ -14,7 +14,6 @@ import { PaginaOndeEstamosComponent } from './componentes/pagina-onde-estamos/pa
 import { AdminComponent } from './componentes/admin/admin.component';
 
 
-
 @Component({
   selector: 'app-root',
   imports: [
@@ -63,4 +62,5 @@ export class AppComponent {
   admin(){
     this.selecaoPagina = 6;
   };
+
 }
