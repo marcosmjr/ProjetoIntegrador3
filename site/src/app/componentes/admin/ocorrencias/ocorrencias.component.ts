@@ -67,7 +67,7 @@ export class OcorrenciasComponent  implements OnInit{
   this.enviaPermissao();
   }
 
-  btnGraficoLinha(){
+  btnGraficoBarras(){
     this.enviaEstadoPermissão.emit("graficoLinhas");
   }
 

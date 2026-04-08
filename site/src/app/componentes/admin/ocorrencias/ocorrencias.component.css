@@ -49,11 +49,18 @@ table {
   font-size: 16px;
 }
 
+.container {
+  display: flex;
+  justify-content: space-between; /* Empurra os dois grupos para as pontas */
+  width: 100%;
+}
 
 .div_btn_ordena{
   display: flex;
-  flex-direction: row-reverse;
+  gap: 10px; /* Espaçamento entre os dois botões da direita */
 }
+
+
 
 .btn-css {
   color: rgb(0, 0, 0);

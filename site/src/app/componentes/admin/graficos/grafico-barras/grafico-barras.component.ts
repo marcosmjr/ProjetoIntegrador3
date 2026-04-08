@@ -1,5 +1,4 @@
 import { Component,AfterViewInit, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { ItensTabela } from './itens-tabela';
 import { RequisicoesService } from '../../../servico/dados/requisicoes.service';
 import { RespostaAPI } from '../../../servico/dados/dados-cliente-recebe-bdinterface';
 import { Chart, registerables } from 'chart.js';
@@ -14,8 +13,11 @@ Chart.register(...registerables);
 })
 export class GraficoLinhasComponent implements OnInit {
 
-  @ViewChild("estatistica", { static: true }) elemento!: ElementRef;
-  chart: any;
+  @ViewChild("estatistica1", { static: true }) elemento1!: ElementRef;
+  chart1: any;
+
+  @ViewChild("estatistica2", { static: true }) elemento2!: ElementRef;
+  chart2: any;
 
    mes: string = "mês";
    servico: string = "serviços";
@@ -28,13 +30,33 @@ export class GraficoLinhasComponent implements OnInit {
   constructor(private requisicoesService: RequisicoesService){}
 
 
-
   ngOnInit(): void {
     this.fazerRequisicao();
   }
 
-  renderizarGrafico() {
-      this.chart = new Chart(this.elemento.nativeElement, {
+  renderizarGrafico1() {
+      this.chart1 = new Chart(this.elemento1.nativeElement, {
+        type: 'bar', // Tipo: bar, line, pie, doughnut, etc.
+        data: {
+          labels: ['Vendas', 'instalação', 'Manutenção', 'Outros'],
+          datasets: [{
+            label: 'Seviços 2026',
+            data: [this.vendas, this.instalacao, this.manutencao, this.outros],
+            backgroundColor: ['#42A5F5', '#FFA726', '#26A69A', '#EC407A'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' }
+          }
+        }
+      });
+  }
+
+   renderizarGrafico2() {
+      this.chart2 = new Chart(this.elemento2.nativeElement, {
         type: 'bar', // Tipo: bar, line, pie, doughnut, etc.
         data: {
           labels: ['Vendas', 'instalação', 'Manutenção', 'Outros'],
@@ -62,7 +84,8 @@ export class GraficoLinhasComponent implements OnInit {
       next: (dados) => {
 
         this.contador(dados);
-        this.renderizarGrafico();
+        this.renderizarGrafico1();
+        this.renderizarGrafico2();
       },
 
       error: (erro) => {
@@ -78,9 +101,6 @@ export class GraficoLinhasComponent implements OnInit {
      for(var i = 0; i < dados.data.length; i++){
         this.servico = dados.data[i]['servico_ocorrencias'] != null ? dados.data[i]['servico_ocorrencias'] : "";
 
-      // for(let i in this.itensTabela){
-       // this.servico = this.itensTabela[i].servico_ocorrencias;
-
         if(this.servico[0] == "i" || this.servico[1] == "i" || this.servico[2] == "i" || this.servico[4] == "i"){
           this.instalacao += 1;
         }
@@ -94,9 +114,8 @@ export class GraficoLinhasComponent implements OnInit {
           this.outros += 1;
         }
       }
-      console.log("instalacao = ", this.instalacao,"this.vendas = ",this.vendas , "this.manutencao = ",this.manutencao , "this.outros = ",this.outros)
-    }
 
+    }
 
 
 
