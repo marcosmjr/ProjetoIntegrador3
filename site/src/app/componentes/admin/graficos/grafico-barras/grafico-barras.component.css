@@ -26,6 +26,12 @@
   background: #1565c0;
 }
 
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .containerGraficos{
   display: flex;
   flex-direction: row;
@@ -34,7 +40,7 @@
 
 .grafico{
 
-  height: 260px;
+  height: 270px;
   width: auto;
 }
 

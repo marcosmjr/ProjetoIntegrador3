@@ -19,12 +19,26 @@ export class GraficoLinhasComponent implements OnInit {
   @ViewChild("estatistica2", { static: true }) elemento2!: ElementRef;
   chart2: any;
 
+   @ViewChild("estatistica3", { static: true }) elemento3!: ElementRef;
+  chart3: any;
+
+   @ViewChild("estatistica4", { static: true }) elemento4!: ElementRef;
+  chart4: any;
+
    mes: string = "mês";
-   servico: string = "serviços";
+  servico: string = "";
   private vendas: number = 0;
   private manutencao: number = 0;
   private instalacao: number = 0;
   private outros: number = 0;
+
+  private pessoaFisica: number = 0;
+  private pessoaJuridica: number = 0;
+
+  private preferencia: string = "";
+  private telefone: number = 0;
+  private whatsApp: number = 0;
+  private email: number = 0;
 
 
   constructor(private requisicoesService: RequisicoesService){}
@@ -40,7 +54,7 @@ export class GraficoLinhasComponent implements OnInit {
         data: {
           labels: ['Vendas', 'instalação', 'Manutenção', 'Outros'],
           datasets: [{
-            label: 'Seviços 2026',
+            label: 'Seviços',
             data: [this.vendas, this.instalacao, this.manutencao, this.outros],
             backgroundColor: ['#42A5F5', '#FFA726', '#26A69A', '#EC407A'],
             borderWidth: 1
@@ -59,10 +73,31 @@ export class GraficoLinhasComponent implements OnInit {
       this.chart2 = new Chart(this.elemento2.nativeElement, {
         type: 'bar', // Tipo: bar, line, pie, doughnut, etc.
         data: {
-          labels: ['Vendas', 'instalação', 'Manutenção', 'Outros'],
+          labels: ['Pessoa física', 'Pessoa juridica'],
           datasets: [{
-            label: 'Seviços 2026',
-            data: [this.vendas, this.instalacao, this.manutencao, this.outros],
+            label: 'Pessoa física / Pessoa jurídica',
+            data: [this.pessoaFisica, this.pessoaJuridica],
+            backgroundColor: ['#42A5F5', '#FFA726'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' }
+          }
+        }
+      });
+  }
+
+  renderizarGrafico3() {
+      this.chart3 = new Chart(this.elemento3.nativeElement, {
+        type: 'bar', // Tipo: bar, line, pie, doughnut, etc.
+        data: {
+          labels: ['Telefone', 'WhatsApp', 'E-mail'],
+          datasets: [{
+            label: 'Meio e comunicação preferido',
+            data: [this.telefone, this.whatsApp, this.email],
             backgroundColor: ['#42A5F5', '#FFA726', '#26A69A', '#EC407A'],
             borderWidth: 1
           }]
@@ -76,6 +111,28 @@ export class GraficoLinhasComponent implements OnInit {
       });
   }
 
+   renderizarGrafico4() {
+      this.chart4 = new Chart(this.elemento4.nativeElement, {
+        type: 'bar', // Tipo: bar, line, pie, doughnut, etc.
+        data: {
+          labels: ['Pessoa física', 'Pessoa juridica'],
+          datasets: [{
+            label: 'Seviços 2026',
+            data: [this.pessoaFisica, this.pessoaJuridica],
+            backgroundColor: ['#42A5F5', '#FFA726'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' }
+          }
+        }
+      });
+  }
+
+
 
   fazerRequisicao(){
 
@@ -83,9 +140,13 @@ export class GraficoLinhasComponent implements OnInit {
 
       next: (dados) => {
 
-        this.contador(dados);
+        this.contadorServicos(dados);
+        this.contadorTipoCliente(dados);
+        this.contadorMeiosComunicacao(dados);
         this.renderizarGrafico1();
         this.renderizarGrafico2();
+        this.renderizarGrafico3();
+        this.renderizarGrafico4();
       },
 
       error: (erro) => {
@@ -96,7 +157,7 @@ export class GraficoLinhasComponent implements OnInit {
 
   }
 
-  contador(dados: RespostaAPI){
+  contadorServicos(dados: RespostaAPI){
 
      for(var i = 0; i < dados.data.length; i++){
         this.servico = dados.data[i]['servico_ocorrencias'] != null ? dados.data[i]['servico_ocorrencias'] : "";
@@ -115,9 +176,35 @@ export class GraficoLinhasComponent implements OnInit {
         }
       }
 
+  }
+
+    contadorTipoCliente(dados: RespostaAPI){
+      for(var i = 0; i < dados.data.length; i++){
+        if(dados.data[i]['nome_empresa_cliente_juridico'] != null){
+        this.pessoaJuridica += 1;
+      }else{
+        this.pessoaFisica += 1;
+      }
+
     }
+  }
 
+contadorMeiosComunicacao(dados: RespostaAPI){
+   for(var i = 0; i < dados.data.length; i++){
+        this.preferencia = dados.data[i]['preferencia_cliente_juridico'] != null ? dados.data[i]['preferencia_cliente_juridico'] : "";
 
+        if(this.preferencia[0] == "t" || this.preferencia[1] == "t" || this.preferencia[2] == "t" ){
+          this.telefone += 1;
+        }
+        if(this.preferencia[0] == "w" || this.preferencia[1] == "w" || this.preferencia[2] == "w"){
+          this.whatsApp += 1;
+        }
+        if(this.preferencia[0] == "e" || this.preferencia[1] == "e" || this.preferencia[2] == "e"){
+          this.email += 1;
+        }
+
+   }
+}
 
 /*************************************************** */
 @Output() enviaVoltar = new EventEmitter<string>();
