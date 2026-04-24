@@ -41,17 +41,23 @@ export class GraficoLinhasComponent implements OnInit {
   private telefoneJuridico: number = 0;
   private whatsAppJuridico: number = 0;
   private emailjuridico: number = 0;
-  private cidadeJuridica: any;
-  private bairroJuridica:Array<string> = [];
+ // private cidadeJuridica: any;
+ // private bairroJuridica:Array<string> = [];
 
   private preferenciaFisico: string = "";
   private telefoneFisico: number = 0;
   private whatsAppFisico: number = 0;
   private emailFisico: number = 0;
-  private cidadeFisica: Array<string> = [];
-  private bairroFisica: Array<string> = [];
+//  private cidadeFisica: Array<string> = [];
+//  private bairroFisica: Array<string> = [];
 
-  private cidadesPessoaJuridica: any;
+//  private cidadesPessoaJuridica: any;
+
+servicoPedido = "";
+tipoCliente = "";
+meioCamunicacaoFisico = "";
+meioCamunicacaoJuridico = "";
+
 
 private teste: any;
 
@@ -89,7 +95,7 @@ private teste: any;
         data: {
           labels: ['Pessoa física', 'Pessoa juridica'],
           datasets: [{
-            label: 'Pessoa física / Pessoa jurídica',
+            label: 'Tipo de cliente',
             data: [this.pessoaFisica, this.pessoaJuridica],
             backgroundColor: ['#42A5F5', '#FFA726'],
             borderWidth: 1
@@ -146,7 +152,7 @@ private teste: any;
       });
   }
 
-   renderizarGrafico5() {
+  // renderizarGrafico5() {
   //     this.chart5 = new Chart(this.elemento5.nativeElement, {
   //       type: 'bar', // Tipo: bar, line, pie, doughnut, etc.
   //       data: {
@@ -165,7 +171,7 @@ private teste: any;
   //         }
   //       }
   //     });
-   }
+   //}
 
 
   fazerRequisicao(){
@@ -182,9 +188,10 @@ private teste: any;
         this.renderizarGrafico2();
         this.renderizarGrafico3();
         this.renderizarGrafico4();
-        this.renderizarGrafico5();
+       // this.renderizarGrafico5();
+       this.destaque();
 
-        console.log("cidadeJuridica = ", this.cidadeJuridica);
+       // console.log("cidadeJuridica = ", this.cidadeJuridica);
       },
 
       error: (erro) => {
@@ -257,9 +264,57 @@ contadorMeiosComunicacaoFisica(dados: RespostaAPI){
         if(this.preferenciaFisico[0] == "e" || this.preferenciaFisico[1] == "e" || this.preferenciaFisico[2] == "e"){
           this.emailFisico += 1;
         }
-
    }
 }
+
+
+destaque(){
+
+  //Verifica qual serviço esta em destaque na amostra de clientes
+  if(this.vendas > this.instalacao &&  this.vendas > this.manutencao && this.vendas > this.outros){
+    this.servicoPedido = " é a compra"
+  }else if(this.instalacao > this.vendas &&  this.instalacao > this.manutencao  && this.instalacao > this.outros){
+    this.servicoPedido = "é a instalção";
+  }else if(this.manutencao > this.vendas &&  this.manutencao > this.instalacao  && this.manutencao > this.outros){
+    this.servicoPedido = "é a manutencao";
+  }else if(this.outros > this.vendas &&  this.outros > this.instalacao  && this.outros > this.manutencao){
+    this.servicoPedido = " são outrooutros";
+  }else{
+    this.servicoPedido = " é um empate de um ou mais serviços";
+  }
+
+  //Verifica que tipo de cliente esta em destaque na amostra de clientes
+  if(this.pessoaFisica > this.pessoaJuridica){
+    this.tipoCliente = " o tipo pessoa física se destaca.";
+  }else if(this.pessoaJuridica > this.pessoaFisica) {
+    this.tipoCliente = " o tipo pessoa jurídica se destaca.";
+  }else{
+    this.tipoCliente = " observamos um empate, ou seja quantidades iguais de cliente de ambos os tipo procuram a empresa.";
+  }
+
+  //Verifica qual meio de comunicação preferida está em destaque na amostra de clientes pessoa juridica
+  if(this.telefoneJuridico > this.whatsAppJuridico && this.telefoneJuridico > this.emailjuridico){
+    this.meioCamunicacaoJuridico = "é o telefone.";
+  }else if(this.whatsAppJuridico > this.telefoneJuridico && this.whatsAppJuridico > this.emailjuridico){
+    this.meioCamunicacaoJuridico = "é o WhatsApp.";
+  }else if(this.emailjuridico > this.telefoneJuridico && this.emailjuridico > this.whatsAppJuridico){
+    this.meioCamunicacaoJuridico = "é o e-mail.";
+  }else{
+    this.meioCamunicacaoJuridico = "está empatado entre dois ou mais meios de comunicação.";
+  }
+
+    //Verifica qual meio de comunicação preferida está em destaque na amostra de clientes pessoa física
+  if(this.telefoneFisico > this.whatsAppFisico && this.telefoneFisico > this.emailFisico){
+    this.meioCamunicacaoFisico = "é o telefone.";
+  }else if(this.whatsAppFisico > this.telefoneFisico && this.whatsAppFisico > this.emailFisico){
+    this.meioCamunicacaoFisico = "é o WhatsApp.";
+  }else if(this.emailFisico > this.telefoneFisico && this.emailFisico > this.whatsAppFisico){
+    this.meioCamunicacaoFisico = "é o e-mail.";
+  }else{
+    this.meioCamunicacaoFisico = "está empatado entre dois ou mais meios de comunicação.";
+  }
+}
+
 
 contadorCidadesJuridica(dados: RespostaAPI): void{
   let cidades: string[] = [];
@@ -269,12 +324,12 @@ contadorCidadesJuridica(dados: RespostaAPI): void{
   }
  }
 
-  const contagem = cidades.reduce((acc: Record<string, number>, cidade: any) => {
-    acc[cidade] = (acc[cidade] || 0) + 1;
-    const resultado = [acc];
-    this.cidadeJuridica = acc;
-    return acc;
-  }, {});
+  // const contagem = cidades.reduce((acc: Record<string, number>, cidade: any) => {
+  //   acc[cidade] = (acc[cidade] || 0) + 1;
+  //   const resultado = [acc];
+  //   this.cidadeJuridica = acc;
+  //   return acc;
+  // }, {});
 }
 
 /*************************************************** */
