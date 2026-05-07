@@ -28,7 +28,7 @@ export class AdminComponent {
 
   usuario: string = 'Administrador';
   senha: string = '';
-  permissao: boolean = true;
+  permissao: boolean = false;
   paginasInternas: number = 0; // escolhe as paginas dentro de admin a ser exibidas
 
    resposta = {
