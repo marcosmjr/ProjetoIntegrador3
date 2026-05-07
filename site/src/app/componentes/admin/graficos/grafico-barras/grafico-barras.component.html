@@ -3,6 +3,11 @@
 <div class="titulo"> dos clientes pessoas físicas e pessoas jurídicas</div>
 <hr>
 <div>
+
+  <div>
+
+  </div>
+
   <div class="containerGraficos">
     <div>
         <canvas class="grafico" #estatistica1></canvas>
@@ -14,7 +19,7 @@
       </div>
   </div>
 
-
+<hr>
   <div class="containerGraficos">
     <div>
       <canvas class="grafico" #estatistica3></canvas>
@@ -24,14 +29,28 @@
       <canvas class="grafico" #estatistica4></canvas>
       <legend>Vemos pelo gráfico acima que a preferência pelo meio de contato de pessoa jurídica {{ meioCamunicacaoFisico }}</legend>
     </div>
-  <!-- </div>
-      <canvas class="grafico" #estatistica5></canvas>
-      <legend>No periodo do mês {{ mes }} houve o maior volume de {{ servico }}</legend>
-  <div> -->
+  </div>
+
+  <hr>
+
+  <div>
+      <canvas class="grafico5" #estatistica5></canvas>
+
+       @if (cidadesDestaque.length > 0){
+          <legend>
+            O gráfico mostra que a a maior parte dos cliente vem da(s) cidade(s) de
+             @for (item of cidadesDestaque; track item.cidade) {
+            {{ item.cidade }},
+             }
+          </legend>
+        }
 
   </div>
 
+
+
 </div>
+
 
 <div class="btnVoltar">
   <button mat-flat-button class="btn-css"(click)="btnVoltar()">Voltar</button>

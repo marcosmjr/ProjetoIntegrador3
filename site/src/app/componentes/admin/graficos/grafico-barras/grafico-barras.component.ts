@@ -27,6 +27,7 @@ export class GraficoLinhasComponent implements OnInit {
 
   @ViewChild("estatistica5", { static: true }) elemento5!: ElementRef;
   chart5: any;
+
   mes: string = "";
   servico: string = "";
   private vendas: number = 0;
@@ -57,6 +58,17 @@ servicoPedido = "";
 tipoCliente = "";
 meioCamunicacaoFisico = "";
 meioCamunicacaoJuridico = "";
+cidadesDestaque: any[] =[];
+
+ cidades = [
+            {cidade: "Americana", quantidade: 0 },
+            {cidade: "Santa Barbara d'Oeste", quantidade: 0 },
+            {cidade: "Nova Odessa", quantidade: 0 },
+            {cidade: "Limeira", quantidade: 0 },
+            {cidade: "Cosmópolis", quantidade: 0 },
+            {cidade: "Paulínia", quantidade: 0 },
+            {cidade: "outras cidades", quantidade: 0 }
+          ];
 
 
 private teste: any;
@@ -152,26 +164,38 @@ private teste: any;
       });
   }
 
-  // renderizarGrafico5() {
-  //     this.chart5 = new Chart(this.elemento5.nativeElement, {
-  //       type: 'bar', // Tipo: bar, line, pie, doughnut, etc.
-  //       data: {
-  //         labels: ['Pessoa física', 'Pessoa juridica'],
-  //         datasets: [{
-  //           label: 'Cliente pessoa físico / Clente pessoa jurídica',
-  //           data: [this.pessoaFisica, this.pessoaJuridica],
-  //           backgroundColor: ['#42A5F5', '#FFA726'],
-  //           borderWidth: 1
-  //         }]
-  //       },
-  //       options: {
-  //         responsive: true,
-  //         plugins: {
-  //           legend: { position: 'top' }
-  //         }
-  //       }
-  //     });
-   //}
+   renderizarGrafico5() {
+      this.chart5 = new Chart(this.elemento5.nativeElement, {
+        type: 'bar', // Tipo: bar, line, pie, doughnut, etc.
+        data: {
+          labels: [this.cidades[0].cidade,
+                   this.cidades[1].cidade,
+                   this.cidades[2].cidade,
+                   this.cidades[3].cidade,
+                   this.cidades[4].cidade,
+                   this.cidades[5].cidade,
+                   this.cidades[6].cidade],
+          datasets: [{
+            label: 'Número de clientes / cidades',
+            data: [this.cidades[0].quantidade,
+                   this.cidades[1].quantidade,
+                   this.cidades[2].quantidade,
+                   this.cidades[3].quantidade,
+                   this.cidades[4].quantidade,
+                   this.cidades[5].quantidade,
+                   this.cidades[6].quantidade],
+            backgroundColor: ['#42A5F5', '#FFA726', '#aa3664', 'rgba(166, 238, 21, 0.2)', 'rgba(155, 98, 0, 0.27)', '#ab3226','#FDA'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' }
+          }
+        }
+      });
+   }
 
 
   fazerRequisicao(){
@@ -184,14 +208,16 @@ private teste: any;
         this.contadorTipoCliente(dados);
         this.contadorMeiosComunicacaoJuridica(dados);
         this.contadorMeiosComunicacaoFisica(dados);
+        this.contadorCidadesJuridica(dados);
         this.renderizarGrafico1();
         this.renderizarGrafico2();
         this.renderizarGrafico3();
         this.renderizarGrafico4();
-       // this.renderizarGrafico5();
-       this.destaque();
+        this.renderizarGrafico5();
+        this.destaque();
+        this.cidadeComMaisClientes()
 
-       // console.log("cidadeJuridica = ", this.cidadeJuridica);
+
       },
 
       error: (erro) => {
@@ -267,6 +293,15 @@ contadorMeiosComunicacaoFisica(dados: RespostaAPI){
    }
 }
 
+cidadeComMaisClientes(){
+if (this.cidades.length === 0) return;
+
+    // 1. Encontra qual é o maior valor numérico no array
+    const maxValor = Math.max(...this.cidades.map(c => c.quantidade));
+
+    // 2. Filtra todas as cidades que possuem esse valor exato
+    this.cidadesDestaque = this.cidades.filter(c => c.quantidade === maxValor);
+}
 
 destaque(){
 
@@ -317,19 +352,88 @@ destaque(){
 
 
 contadorCidadesJuridica(dados: RespostaAPI): void{
-  let cidades: string[] = [];
- for(let i in dados.data){
-  if(dados.data[i].cidade_cliente_juridico != undefined){
-    cidades.push(dados.data[i].cidade_cliente_juridico);
-  }
+
+ for(var i = 0; i < dados.data.length; i++){
+
+
+    if((new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "americana"){
+      this.cidades[0].quantidade += 1;
+    }else if(
+      (new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "santa barbara" ||
+      (new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "santa barbara do oeste" ||
+      (new String(dados.data[i].cidade_cliente_juridico)).toLocaleLowerCase() == "santa barbara d'oeste" ||
+      (new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "santa barbara d'Oeste"
+    ){
+      this.cidades[1].quantidade += 1;
+    }else if((new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "nova odessa"){
+
+      this.cidades[2].quantidade += 1;
+
+    }else if((new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "limeira"){
+
+      this.cidades[3].quantidade += 1;
+
+    }else if((new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "cosmópolis" ||
+      (new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "cosmopolis"){
+
+      this.cidades[4].quantidade += 1;
+
+    }else if((new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "paulínia" ||
+      (new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "paulinia" ||
+      (new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "paulínea" ||
+      (new String(dados.data[i].cidade_cliente_juridico)).toLowerCase() == "paulinea"){
+
+      this.cidades[5].quantidade += 1;
+
+    }else if(dados.data[i].cidade_cliente_juridico !== undefined){
+
+      this.cidades[6].quantidade += 1;
+
+    }
+
+
+   if((new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "americana"){
+
+      this.cidades[0].quantidade += 1;
+
+    }else if(
+      (new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "santa barbara" ||
+      (new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "santa barbara do oeste" ||
+      (new String(dados.data[i].cidade_cliente_fisico)).toLocaleLowerCase() == "santa barbara d'oeste" ||
+      (new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "santa barbara d'Oeste"
+    ){
+
+      this.cidades[1].quantidade += 1;
+
+    }else if((new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "nova odessa"){
+
+      this.cidades[2].quantidade += 1;
+
+    }else if((new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "limeira"){
+
+      this.cidades[3].quantidade += 1;
+
+    }else if((new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "cosmópolis" ||
+      (new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "cosmopolis"){
+
+      this.cidades[4].quantidade += 1;
+
+    }else if((new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "paulínia" ||
+      (new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "paulinia" ||
+      (new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "paulínea" ||
+      (new String(dados.data[i].cidade_cliente_fisico)).toLowerCase() == "paulinea"){
+
+      this.cidades[5].quantidade += 1;
+
+    }else if(dados.data[i].cidade_cliente_fisico !== undefined){
+
+      this.cidades[6].quantidade += 1;
+
+    }
+
+
  }
 
-  // const contagem = cidades.reduce((acc: Record<string, number>, cidade: any) => {
-  //   acc[cidade] = (acc[cidade] || 0) + 1;
-  //   const resultado = [acc];
-  //   this.cidadeJuridica = acc;
-  //   return acc;
-  // }, {});
 }
 
 /*************************************************** */
